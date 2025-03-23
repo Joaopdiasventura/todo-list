@@ -1,20 +1,42 @@
 {
   "expo": {
+    "name": "Todo List",
+    "slug": "todo-list",
     "scheme": "acme",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
-    "web": {
-      "output": "static"
-    },
+    "owner": "jpplay2_0",
     "plugins": [
       [
         "expo-router",
         {
           "origin": "https://n"
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
-    "name": "todo-list",
-    "slug": "todo-list"
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "14abe240-c27d-48bb-a0df-7a5fa4f44cf6"
+      }
+    },
+    "web": {
+      "output": "static"
+    },
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.jpplay2_0.todolist"
+    }
   }
 }
