@@ -109,10 +109,10 @@ export default function Page() {
     };
 
     return (
-        <View className={`${theme == "dark" ? "bg-black" : "bg-white"} flex-1 p-4`}>
+        <View className={`${theme == "dark" ? "bg-zinc-950" : "bg-white"} flex-1 p-4`}>
             <View className="flex-row justify-between items-center mb-4">
                 <Text className={`${theme == "dark" ? "text-white" : "text-black"} text-2xl font-bold`}>
-                    Todo List
+                    TO DO LIST
                 </Text>
                 <TouchableOpacity className="p-2 justify-center" onPress={toggleTheme}>
                     <Text className="text-red-500">{theme == "dark" ? "Light" : "Dark"}</Text>
@@ -123,18 +123,18 @@ export default function Page() {
                 <TextInput
                     value={inputText}
                     onChangeText={setInputText}
-                    placeholder="Adicionar tarefa"
+                    placeholder="Adicionar tarefa..."
                     placeholderTextColor={theme == "dark" ? "#888" : "#999"}
                     className={`flex-1 border rounded p-2 mr-2 ${theme == "dark"
-                        ? "border-gray-600 text-white bg-gray-800"
-                        : "border-gray-300 text-black bg-white"
+                        ? "border-zinc-600 text-white bg-zinc-800"
+                        : "border-zinc-300 text-black bg-white"
                         }`}
                 />
                 <TouchableOpacity
                     onPress={addTodo}
                     className="bg-red-500 rounded p-2 justify-center"
                 >
-                    <Text className="text-white font-bold">Add</Text>
+                    <Text className="text-white font-bold">     +     </Text>
                 </TouchableOpacity>
             </View>
 
