@@ -9,37 +9,37 @@ import {
 import { SQLiteDatabase } from "expo-sqlite";
 import { ItemComponent } from "../shared/components/ItemComponent";
 import { useTheme } from "../shared/context/ThemeContext";
-import { connect } from "../shared/database/db";
+// import { connect } from "../shared/database/db";
 import { Todo } from "../shared/interfaces/todo";
 
 export default function Page() {
     const { theme, toggleTheme } = useTheme();
 
-    const [db, setDb] = useState<SQLiteDatabase | null>(null);
+    // const [db, setDb] = useState<SQLiteDatabase | null>(null);
     const [todos, setTodos] = useState<Todo[]>([]);
     const [inputText, setInputText] = useState<string>("");
 
     useEffect(() => {
         let isMounted = true;
 
-        const initDb = async () => {
-            const database = await connect();
-            if (!isMounted) return;
-            setDb(database);
+        // const initDb = async () => {
+        //     // const database = await connect();
+        //     if (!isMounted) return;
+        //     setDb(database);
 
-            await database.execAsync(`
-                CREATE TABLE IF NOT EXISTS todos (
-                id TEXT PRIMARY KEY NOT NULL,
-                text TEXT,
-                done BOOLEAN
-                );
-            `);
+        //     await database.execAsync(`
+        //         CREATE TABLE IF NOT EXISTS todos (
+        //         id TEXT PRIMARY KEY NOT NULL,
+        //         text TEXT,
+        //         done BOOLEAN
+        //         );
+        //     `);
 
-            if (!isMounted) return;
-            fetchTodos(database);
-        };
+        //     if (!isMounted) return;
+        //     fetchTodos(database);
+        // };
 
-        initDb();
+        // initDb();
 
         return () => {
             isMounted = false;
@@ -56,7 +56,7 @@ export default function Page() {
     };
 
     const addTodo = async () => {
-        if (!db || inputText.trim().length == 0) return;
+        // if (!db || inputText.trim().length == 0) return;
 
         const newTodo: Todo = {
             id: Date.now().toString(),
@@ -65,10 +65,10 @@ export default function Page() {
         };
 
         try {
-            await db.runAsync(
-                "INSERT INTO todos (id, text, done) VALUES (?, ?, ?);",
-                [newTodo.id, newTodo.text, 0]
-            );
+            // await db.runAsync(
+            //     "INSERT INTO todos (id, text, done) VALUES (?, ?, ?);",
+            //     [newTodo.id, newTodo.text, 0]
+            // );
             setTodos((prev) => [...prev, newTodo]);
             setInputText("");
         } catch (err) {
@@ -77,7 +77,7 @@ export default function Page() {
     };
 
     const toggleTodo = async (id: string) => {
-        if (!db) return;
+        // if (!db) return;
 
         const updatedTodos = todos.map((todo) =>
             todo.id == id ? { ...todo, done: !todo.done } : todo
@@ -88,20 +88,20 @@ export default function Page() {
         if (!todo) return;
 
         try {
-            await db.runAsync("UPDATE todos SET done = ? WHERE id = ?;", [
-                todo.done ? 1 : 0,
-                todo.id,
-            ]);
+            // await db.runAsync("UPDATE todos SET done = ? WHERE id = ?;", [
+            //     todo.done ? 1 : 0,
+            //     todo.id,
+            // ]);
         } catch (err) {
             console.error("Erro ao atualizar todo:", err);
         }
     };
 
     const deleteTodo = async (id: string) => {
-        if (!db) return;
+        // if (!db) return;
 
         try {
-            await db.runAsync("DELETE FROM todos WHERE id = ?;", [id]);
+            // await db.runAsync("DELETE FROM todos WHERE id = ?;", [id]);
             setTodos((prev) => prev.filter((todo) => todo.id !== id));
         } catch (err) {
             console.error("Erro ao deletar todo:", err);
@@ -146,7 +146,7 @@ export default function Page() {
                 </View>
             </View>
 
-            {todos.length === 0 ? (
+            {todos.length == 0 ? (
                 <View className={`${theme === "dark" ? "bg-zinc-900" : "bg-white"} border ${theme === "dark" ? "border-zinc-800" : "border-zinc-200"} rounded-2xl p-8 items-center justify-center`}>
                     <Text className={`${theme === "dark" ? "text-zinc-400" : "text-zinc-500"} text-base`}>Sem tarefas. Adicione a primeira acima.</Text>
                 </View>
