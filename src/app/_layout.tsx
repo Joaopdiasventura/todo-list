@@ -1,6 +1,11 @@
 import "../global.css";
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
+import { ThemeProvider } from "./shared/context/ThemeContext";
 
 export default function Layout() {
-  return <Slot />;
+  return (
+    <ThemeProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </ThemeProvider>
+  );
 }

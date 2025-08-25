@@ -7,10 +7,10 @@ import {
     ScrollView,
 } from "react-native";
 import { SQLiteDatabase } from "expo-sqlite";
-import { ItemComponent } from "../shared/components/ItemComponent";
-import { useTheme } from "../shared/context/ThemeContext";
+import { ItemComponent } from "./shared/components/ItemComponent";
+import { useTheme } from "./shared/context/ThemeContext";
 // import { connect } from "../shared/database/db";
-import { Todo } from "../shared/interfaces/todo";
+import { Todo } from "./shared/interfaces/todo";
 
 export default function Page() {
     const { theme, toggleTheme } = useTheme();
@@ -109,31 +109,31 @@ export default function Page() {
     };
 
     return (
-        <View className={`${theme === "dark" ? "bg-zinc-950" : "bg-zinc-50"} flex-1 p-5`}>
+        <View className={`${theme == "dark" ? "bg-zinc-950" : "bg-zinc-50"} flex-1 p-5`}>
             <View className="flex-row justify-between items-center mb-5">
-                <Text className={`${theme === "dark" ? "text-zinc-50" : "text-zinc-900"} text-3xl font-extrabold`}>
+                <Text className={`${theme == "dark" ? "text-zinc-50" : "text-zinc-900"} text-3xl font-extrabold`}>
                     Todo List
                 </Text>
-                <TouchableOpacity onPress={toggleTheme} className={`${theme === "dark" ? "bg-zinc-800" : "bg-zinc-100"} px-3 py-2 rounded-full`}>
-                    <Text className={`${theme === "dark" ? "text-zinc-100" : "text-zinc-800"} text-sm font-semibold`}>
-                        {theme === "dark" ? "Light" : "Dark"}
+                <TouchableOpacity onPress={toggleTheme} className={`${theme == "dark" ? "bg-zinc-800" : "bg-zinc-100"} px-3 py-2 rounded-full`}>
+                    <Text className={`${theme == "dark" ? "text-zinc-100" : "text-zinc-800"} text-sm font-semibold`}>
+                        {theme == "dark" ? "Light" : "Dark"}
                     </Text>
                 </TouchableOpacity>
             </View>
 
-            <View className={`${theme === "dark" ? "bg-zinc-900 border-zinc-800" : "bg-white border-zinc-200"} border rounded-2xl p-3 mb-4 shadow`}>
+            <View className={`${theme == "dark" ? "bg-zinc-900 border-zinc-800" : "bg-white border-zinc-200"} border rounded-2xl p-3 mb-4 shadow`}>
                 <View className="flex-row items-center">
                     <TextInput
                         value={inputText}
                         onChangeText={setInputText}
                         placeholder="Adicionar tarefa"
-                        placeholderTextColor={theme === "dark" ? "#8b8b8b" : "#9ca3af"}
-                        className={`flex-1 h-12 px-4 rounded-xl ${theme === "dark" ? "text-zinc-100 bg-zinc-800" : "text-zinc-900 bg-zinc-50"}`}
+                        placeholderTextColor={theme == "dark" ? "#8b8b8b" : "#9ca3af"}
+                        className={`flex-1 h-12 px-4 rounded-xl ${theme == "dark" ? "text-zinc-100 bg-zinc-800" : "text-zinc-900 bg-zinc-50"}`}
                         returnKeyType="done"
                     />
                     {inputText?.length ? (
                         <TouchableOpacity onPress={() => setInputText("")} className="ml-2 px-3 h-12 rounded-xl justify-center border border-transparent">
-                            <Text className={`${theme === "dark" ? "text-zinc-400" : "text-zinc-500"} text-sm`}>Limpar</Text>
+                            <Text className={`${theme == "dark" ? "text-zinc-400" : "text-zinc-500"} text-sm`}>Limpar</Text>
                         </TouchableOpacity>
                     ) : null}
                     <TouchableOpacity
@@ -147,8 +147,8 @@ export default function Page() {
             </View>
 
             {todos.length == 0 ? (
-                <View className={`${theme === "dark" ? "bg-zinc-900" : "bg-white"} border ${theme === "dark" ? "border-zinc-800" : "border-zinc-200"} rounded-2xl p-8 items-center justify-center`}>
-                    <Text className={`${theme === "dark" ? "text-zinc-400" : "text-zinc-500"} text-base`}>Sem tarefas. Adicione a primeira acima.</Text>
+                <View className={`${theme == "dark" ? "bg-zinc-900" : "bg-white"} border ${theme == "dark" ? "border-zinc-800" : "border-zinc-200"} rounded-2xl p-8 items-center justify-center`}>
+                    <Text className={`${theme == "dark" ? "text-zinc-400" : "text-zinc-500"} text-base`}>Sem tarefas. Adicione a primeira acima.</Text>
                 </View>
             ) : null}
 
