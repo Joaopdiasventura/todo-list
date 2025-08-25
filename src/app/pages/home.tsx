@@ -109,36 +109,50 @@ export default function Page() {
     };
 
     return (
-        <View className={`${theme == "dark" ? "bg-black" : "bg-white"} flex-1 p-4`}>
-            <View className="flex-row justify-between items-center mb-4">
-                <Text className={`${theme == "dark" ? "text-white" : "text-black"} text-2xl font-bold`}>
+        <View className={`${theme === "dark" ? "bg-zinc-950" : "bg-zinc-50"} flex-1 p-5`}>
+            <View className="flex-row justify-between items-center mb-5">
+                <Text className={`${theme === "dark" ? "text-zinc-50" : "text-zinc-900"} text-3xl font-extrabold`}>
                     Todo List
                 </Text>
-                <TouchableOpacity className="p-2 justify-center" onPress={toggleTheme}>
-                    <Text className="text-red-500">{theme == "dark" ? "Light" : "Dark"}</Text>
+                <TouchableOpacity onPress={toggleTheme} className={`${theme === "dark" ? "bg-zinc-800" : "bg-zinc-100"} px-3 py-2 rounded-full`}>
+                    <Text className={`${theme === "dark" ? "text-zinc-100" : "text-zinc-800"} text-sm font-semibold`}>
+                        {theme === "dark" ? "Light" : "Dark"}
+                    </Text>
                 </TouchableOpacity>
             </View>
 
-            <View className="flex-row mb-4">
-                <TextInput
-                    value={inputText}
-                    onChangeText={setInputText}
-                    placeholder="Adicionar tarefa"
-                    placeholderTextColor={theme == "dark" ? "#888" : "#999"}
-                    className={`flex-1 border rounded p-2 mr-2 ${theme == "dark"
-                        ? "border-gray-600 text-white bg-gray-800"
-                        : "border-gray-300 text-black bg-white"
-                        }`}
-                />
-                <TouchableOpacity
-                    onPress={addTodo}
-                    className="bg-red-500 rounded p-2 justify-center"
-                >
-                    <Text className="text-white font-bold">Add</Text>
-                </TouchableOpacity>
+            <View className={`${theme === "dark" ? "bg-zinc-900 border-zinc-800" : "bg-white border-zinc-200"} border rounded-2xl p-3 mb-4 shadow`}>
+                <View className="flex-row items-center">
+                    <TextInput
+                        value={inputText}
+                        onChangeText={setInputText}
+                        placeholder="Adicionar tarefa"
+                        placeholderTextColor={theme === "dark" ? "#8b8b8b" : "#9ca3af"}
+                        className={`flex-1 h-12 px-4 rounded-xl ${theme === "dark" ? "text-zinc-100 bg-zinc-800" : "text-zinc-900 bg-zinc-50"}`}
+                        returnKeyType="done"
+                    />
+                    {inputText?.length ? (
+                        <TouchableOpacity onPress={() => setInputText("")} className="ml-2 px-3 h-12 rounded-xl justify-center border border-transparent">
+                            <Text className={`${theme === "dark" ? "text-zinc-400" : "text-zinc-500"} text-sm`}>Limpar</Text>
+                        </TouchableOpacity>
+                    ) : null}
+                    <TouchableOpacity
+                        onPress={addTodo}
+                        disabled={!inputText?.trim()}
+                        className={`ml-2 h-12 px-5 rounded-xl justify-center ${!inputText?.trim() ? "opacity-50" : ""} bg-red-500`}
+                    >
+                        <Text className="text-white font-bold">Adicionar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
-            <ScrollView className="flex flex-col w-full gap-[1vh]" showsVerticalScrollIndicator={false}>
+            {todos.length === 0 ? (
+                <View className={`${theme === "dark" ? "bg-zinc-900" : "bg-white"} border ${theme === "dark" ? "border-zinc-800" : "border-zinc-200"} rounded-2xl p-8 items-center justify-center`}>
+                    <Text className={`${theme === "dark" ? "text-zinc-400" : "text-zinc-500"} text-base`}>Sem tarefas. Adicione a primeira acima.</Text>
+                </View>
+            ) : null}
+
+            <ScrollView className="flex-1" contentContainerClassName="gap-3 pb-6">
                 {todos.map((todo) => (
                     <ItemComponent
                         key={todo.id}
@@ -150,4 +164,5 @@ export default function Page() {
             </ScrollView>
         </View>
     );
+
 }
